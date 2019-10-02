@@ -1,16 +1,29 @@
+import sys
 import os
 import json
 import collections
 import configparser
+import shutil
 from wikicurses import formats
 from urllib.parse import urlparse
 
-default_configdir = os.environ['HOME'] + '/.config'
+# TODO: This may cause issues with python 2.7; however, as of 01OCT2019, it is nearing sunset
+default_configdir = os.path.expanduser('~') + '/.config'
 configpath = os.environ.get(
     'XDG_CONFIG_HOME', default_configdir) + '/wikicurses'
 
+configfile = os.path.join(configpath, "config")
+
+os.makedirs(configpath, exist_ok=True)
+
+if not os.path.isfile(configfile):
+	# Copy the default config file 
+	current_run_path = os.path.dirname(os.path.realpath(sys.argv[0]))
+	default_config = os.path.normpath(os.path.join(current_run_path, "../share/wikicurses/wikicurses.conf.dist"))
+	shutil.copyfile(default_config, configfile)
+
 conf = configparser.ConfigParser()
-conf.read(['/etc/wikicurses.conf', configpath + '/config'])
+conf.read(configpath + '/config')
 
 try:
     mouse = conf.getboolean('general', 'mouse')

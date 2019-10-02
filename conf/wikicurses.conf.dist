@@ -1,0 +1,28 @@
+###
+# Wikicurses configuration 
+# This file will automatically be copied to the user configuration path on first run 
+# User configuration stored in ~/.config/wikicurses/config (i.e. $HOME/.config/wikicurses/config) 
+
+[general]
+default = Wikipedia_EN
+mouse = False
+hide_references = False
+
+[keymap]
+q = quit
+c = contents
+o = open
+h = back
+l = forward
+left = back
+right = forward
+
+[Wikipedia_EN]
+url = https://en.wikipedia.org/w/api.php
+
+[Wiktionary_EN]
+url = https://en.wiktionary.org/w/api.php
+
+# Additional Languages
+# [Wikipedia_DE]
+# url = https://de.wikipdia.org/w/api.php
